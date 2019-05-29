@@ -14,7 +14,7 @@
  * 5. 问题是，不能所有的页面都请求数据、播放声音、弹出Notification通知框
  * 6. 这就需要有一种单例的机制：同一时刻，只有一个页面再主要工作，其他页面都静默渲染，只有它关了或者挂了的时候，再有一个页面出来扛旗
  * 
- * web-singleton.js 这个文件就是实现这个功能，当然了还包括一个后台SharedWorker文件 web-singleton-share-worker
+ * web-singleton.js 这个文件就是实现这个功能，当然了还包括一个后台SharedWorker文件 web-singleton-shared-worker.js
  * 参考 https://developer.mozilla.org/zh-CN/docs/Web/API/SharedWorker/SharedWorker
  * 
  * 使用示例一
@@ -179,7 +179,7 @@
 
     // var blob = new Blob([__workerContent], {type: 'text/javascript'});
     // __worker = new SharedWorker(window.URL.createObjectURL(blob), '--web-singletn-worker--');
-    __worker = new SharedWorker('web-singleton-share-worker.js', '--web-singletn-worker--');
+    __worker = new SharedWorker('web-singleton-shared-worker.js', '--web-singletn-worker--');
     __worker.port.addEventListener('message', function(e) {
       if (e.data === 'start') {
         // console.log('来自worker的消息：', e.data)
